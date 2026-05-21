@@ -564,28 +564,200 @@ footer{
 /* COUNTER ANIMATION */
 .count-up{display:inline-block}
 
-/* MOBILE */
+/* HAMBURGER MENU */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  padding:4px;
+  background:none;
+  border:none;
+}
+.nav-hamburger span{
+  display:block;
+  width:24px;height:1.5px;
+  background:var(--white);
+  transition:background .5s, transform .3s, opacity .3s;
+}
+nav.scrolled .nav-hamburger span{background:var(--dark)}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* MOBILE MENU OVERLAY */
+.mobile-menu{
+  display:none;
+  position:fixed;inset:0;
+  background:var(--dark);
+  z-index:190;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2.5rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;
+  font-weight:400;
+  color:var(--white);
+  text-decoration:none;
+  letter-spacing:.05em;
+  transition:color .3s;
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .m-cta{
+  margin-top:1rem;
+  padding:1rem 3rem;
+  background:var(--gold);
+  color:var(--dark)!important;
+  font-family:'DM Sans',sans-serif;
+  font-size:.85rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+/* TABLET — 900px */
 @media(max-width:900px){
+  /* nav */
   nav{padding:1.5rem 2rem}
   .nav-links{display:none}
-  .hero{grid-template-columns:1fr}
-  .hero-left{height:45vh}
-  .hero-right{padding:3rem 2rem}
-  .story-intro,.trouwen-inner,.portret-inner,.contact-section{grid-template-columns:1fr}
-  .trouwen-gallery{grid-template-columns:1fr 1fr}
-  .teller-section{grid-template-columns:1fr 1fr}
-  .bedrijf-header{grid-template-columns:1fr}
-  .reviews-grid{grid-template-columns:1fr}
+  .nav-hamburger{display:flex}
+
+  /* hero: foto boven, tekst onder */
+  .hero{grid-template-columns:1fr;grid-template-rows:55vh 1fr}
+  .hero-left{height:55vh}
+  .hero-counter{bottom:1rem;left:1rem;font-size:.65rem}
+  .hero-right{padding:3rem 2.5rem 4rem;justify-content:center}
+  .hero-title{font-size:clamp(2.2rem,6vw,3.5rem)}
+  .hero-body{font-size:.95rem;margin-bottom:2rem}
+  .scroll-line-wrap{display:none}
+
+  /* story intro */
+  .story-intro{
+    grid-template-columns:1fr;
+    gap:3rem;
+    padding:6rem 2.5rem;
+  }
+  .story-intro-visual{max-width:480px;margin:0 auto}
   .img-accent{display:none}
-  footer{flex-direction:column;text-align:center}
-  .reviews-header{flex-direction:column;align-items:flex-start;gap:1rem}
-}
-@media(max-width:600px){
-  .story-intro,.portret-section,.bedrijf-section,.reviews-section{padding:6rem 1.5rem}
-  .contact-section{padding:6rem 1.5rem}
-  .teller-section{padding:4rem 1.5rem}
+
+  /* trouwen */
+  .trouwen-section{padding:6rem 0}
+  .trouwen-inner{grid-template-columns:1fr}
+  .trouwen-text{padding:3rem 2.5rem}
+  .trouwen-gallery{grid-template-columns:1fr 1fr}
+  .trouwen-gallery img:first-child{aspect-ratio:16/9}
+
+  /* quote */
+  .quote-section{padding:6rem 2.5rem}
+  .big-quote{font-size:clamp(1.3rem,3vw,2rem)}
+
+  /* portret */
+  .portret-section{padding:6rem 2.5rem}
+  .portret-inner{
+    grid-template-columns:1fr;
+    gap:3rem;
+  }
+  .portret-mosaic{
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto;
+    max-width:480px;
+    margin:0 auto;
+  }
+  .portret-mosaic img:nth-child(1){grid-row:auto;aspect-ratio:1}
+
+  /* teller */
+  .teller-section{
+    grid-template-columns:1fr 1fr;
+    padding:5rem 2.5rem;
+    gap:3rem;
+  }
+
+  /* bedrijf */
+  .bedrijf-section{padding:6rem 2.5rem}
+  .bedrijf-header{grid-template-columns:1fr;gap:1.5rem}
   .bedrijf-grid{grid-template-columns:1fr 1fr}
-  .portret-mosaic{grid-template-columns:1fr}
+  .bedrijf-grid img:nth-child(1){
+    grid-column:1/-1;
+    aspect-ratio:16/9;
+  }
+
+  /* reviews */
+  .reviews-section{padding:6rem 2.5rem}
+  .reviews-header{flex-direction:column;align-items:flex-start;gap:1rem}
+  .reviews-grid{grid-template-columns:1fr}
+
+  /* contact */
+  .contact-section{
+    grid-template-columns:1fr;
+    gap:4rem;
+    padding:6rem 2.5rem;
+  }
+
+  /* footer */
+  footer{
+    flex-direction:column;
+    text-align:center;
+    gap:1.5rem;
+    padding:2.5rem 2rem;
+  }
+  .footer-links{justify-content:center;flex-wrap:wrap;gap:1.2rem}
+}
+
+/* SMALL MOBILE — 480px */
+@media(max-width:480px){
+  /* hero */
+  .hero-left{height:50vh}
+  .hero-right{padding:2.5rem 1.5rem 3rem}
+  .hero-title{font-size:clamp(2rem,8vw,2.8rem)}
+  .hero-body{font-size:.9rem}
+  .hero-actions{flex-direction:column;align-items:flex-start;gap:1rem}
+  .btn-primary{width:100%;text-align:center;padding:.9rem 1.5rem}
+
+  /* story intro */
+  .story-intro{padding:5rem 1.5rem;gap:2.5rem}
+
+  /* trouwen */
+  .trouwen-text{padding:2.5rem 1.5rem}
+  .trouwen-gallery{grid-template-columns:1fr}
+  .trouwen-gallery img:first-child{aspect-ratio:4/3}
+
+  /* quote */
+  .quote-section{padding:5rem 1.5rem}
+
+  /* portret */
+  .portret-section{padding:5rem 1.5rem}
+  .portret-mosaic{grid-template-columns:1fr;max-width:100%}
+  .portret-mosaic img:nth-child(1){aspect-ratio:4/3}
+  .portret-mosaic img:nth-child(2){aspect-ratio:4/3}
+  .portret-mosaic img:nth-child(3){aspect-ratio:4/3}
+
+  /* teller */
+  .teller-section{
+    grid-template-columns:1fr 1fr;
+    padding:4rem 1.5rem;
+    gap:2rem;
+  }
+  .teller-num{font-size:clamp(2rem,8vw,3rem)}
+
+  /* bedrijf */
+  .bedrijf-section{padding:5rem 1.5rem}
+  .bedrijf-grid{grid-template-columns:1fr}
+  .bedrijf-grid img:nth-child(1){grid-column:1;aspect-ratio:4/3}
+  .bedrijf-grid img{aspect-ratio:4/3}
+
+  /* reviews */
+  .reviews-section{padding:5rem 1.5rem}
+  .review-block{padding:2rem 1.5rem}
+
+  /* contact */
+  .contact-section{padding:5rem 1.5rem;gap:3rem}
+
+  /* footer */
+  footer{padding:2rem 1.5rem}
+  .footer-links{flex-direction:column;gap:.8rem}
 }
 </style>
 </head>
@@ -600,7 +772,19 @@ footer{
     <li><a href="#over">Over Ed</a></li>
     <li><a href="#contact" class="nav-cta">Neem contact op</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu openen">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#trouwen" onclick="closeMenu()">Trouwen</a>
+  <a href="#portret" onclick="closeMenu()">Portret</a>
+  <a href="#bedrijf" onclick="closeMenu()">Bedrijf</a>
+  <a href="#over" onclick="closeMenu()">Over Ed</a>
+  <a href="#contact" class="m-cta" onclick="closeMenu()">Neem contact op</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -859,6 +1043,20 @@ footer{
 </footer>
 
 <script>
+// Hamburger menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 // Hero carousel
 let hsCurrent = 0;
 const hsSlides = document.querySelectorAll('.hero-left .hs');
